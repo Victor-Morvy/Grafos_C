@@ -1,3 +1,5 @@
+//Prof. Cesar Tegani Tofanini
+
 #include <stdio.h>
 #include <locale.h>
 
@@ -9,11 +11,11 @@ typedef struct nodetype {
 
 void __addend(nodetype *grafo, nodetype *novono)
 {
-	// vai atÈ o final da lista ligada
+	// vai at√© o final da lista ligada
 	while(grafo->next!=NULL)
 		grafo = grafo->next;
 
-	// vincula o ˙ltimo nÛ com o novo
+	// vincula o √∫ltimo n√≥ com o novo
 	grafo->next = novono;
 }
 
@@ -28,7 +30,7 @@ nodetype * getnode(int x)
 }
 
 // findnode(x) - retorna um ponteiro para 
-// um nÛ de cabeÁalho com info == x
+// um n√≥ de cabe√ßalho com info == x
 nodetype* findnode(nodetype *grafo, int x)
 {
 	while(grafo!=NULL)
@@ -40,7 +42,7 @@ nodetype* findnode(nodetype *grafo, int x)
 	return NULL;
 }
 
-// adjacent(a,b) - retorna true se "b" for adjascente a "b" e false caso contr·rio.
+// adjacent(a,b) - retorna true se "b" for adjascente a "b" e false caso contr√°rio.
 int adjacent(nodetype *grafo, int a, int b)
 {
 	nodetype *na;
@@ -48,26 +50,26 @@ int adjacent(nodetype *grafo, int a, int b)
 	if (grafo==NULL)
 		return 0;
 	
-	// procura um nÛ com valor "a"
+	// procura um n√≥ com valor "a"
 	na = findnode(grafo, a);
 	if (na==NULL)
-		return 0; // se n„o acha retorna false
+		return 0; // se n√£o acha retorna false
 	
-	// se achar, pega a lista de adjacÍncia do nÛ com valor "a"
+	// se achar, pega a lista de adjac√™ncia do n√≥ com valor "a"
 	grafo = na->point;
 	
 	// percorre a lista
 	while(grafo!=NULL)
 	{
-		// verifica se cada item da adjacÍncia aponta
-		// para um nÛ cujo valor È "b"
+		// verifica se cada item da adjac√™ncia aponta
+		// para um n√≥ cujo valor √© "b"
 		if ((grafo->point)->info==b)
 			return 1;
 		else
-			grafo = grafo->next; // prÛximo nÛ da adjacÍncia
+			grafo = grafo->next; // pr√≥ximo n√≥ da adjac√™ncia
 	}
 	
-	// se n„o encontrar, retorna false
+	// se n√£o encontrar, retorna false
 	return 0;
 }
 
@@ -75,13 +77,13 @@ void addnode(nodetype *grafo, int x)
 {
 	nodetype *novono = NULL;
 	
-	// cria um novo nÛ, com o valor
+	// cria um novo n√≥, com o valor
 	novono = getnode(x);
 
 	__addend(grafo, novono);
 }
 
-// joinwt(a,b,x) - insere um arco do nÛ "a" atÈ no nÛ "b" com peso "x" em um grafo ponderado
+// joinwt(a,b,x) - insere um arco do n√≥ "a" at√© no n√≥ "b" com peso "x" em um grafo ponderado
 void joinwt(nodetype *grafo, int p, int q, int x)
 {
 	nodetype *np;
@@ -93,25 +95,25 @@ void joinwt(nodetype *grafo, int p, int q, int x)
 		np = findnode(grafo, p);
 		nq = findnode(grafo, q);
 		
-		// se os dois nÛs existirem
+		// se os dois n√≥s existirem
 		if (np!=NULL && nq!=NULL)
 		{
-			// cria um novo nÛ de adjascencÍncia
+			// cria um novo n√≥ de adjascenc√™ncia
 			novono = getnode(x);
 			
-			//novo nÛ aponta para o nÛ de destino
+			//novo n√≥ aponta para o n√≥ de destino
 			novono->point = nq;
 			
-			// se o nÛ de origem ainda n„o for origem de nenhum arco
+			// se o n√≥ de origem ainda n√£o for origem de nenhum arco
 			if(np->point==NULL)
 				np->point = novono; // seta o primeiro
 			else
-				__addend(np->point, novono); // sen„o, adiciona no final
+				__addend(np->point, novono); // sen√£o, adiciona no final
 		}
 	}
 }
 
-// join(a,b) - introduz um arco de nÛ "a" atÈ o nÛ "b" se ainda n„o existir
+// join(a,b) - introduz um arco de n√≥ "a" at√© o n√≥ "b" se ainda n√£o existir
 void join(nodetype *grafo, int p, int q)
 {
 	joinwt(grafo, p, q, 0);
